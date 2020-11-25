@@ -1,9 +1,10 @@
 DROP DATABASE IF EXISTS employees_db; 
 CREATE DATABASE employees_db; 
 USE employees_db; 
+
 CREATE TABLE department (
   id int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30)UNIQUE  NOT NULL
+  department_name VARCHAR(30)UNIQUE  NOT NULL
 );
 
 CREATE TABLE role (
