@@ -88,27 +88,33 @@ function update() {
     });
 }
 
+// view employee
 function viewEmployee() {
   // query the database for all items being auctioned
   connection.query("SELECT * FROM employee", function(err, results) {
     if (err) throw err;
     console.table(results); 
+    add(); 
   });
 }
 
+// view role
 function viewRole() {
   // query the database for all items being auctioned
   connection.query("SELECT * FROM role", function(err, results) {
     if (err) throw err;
     console.table(results); 
+    add(); 
   });
 }
 
+// view department
 function viewDepartment() {
   // query the database for all items being auctioned
   connection.query("SELECT * FROM department", function(err, results) {
     if (err) throw err;
     console.table(results); 
+    add(); 
   });
 }
 
@@ -174,6 +180,7 @@ function viewDepartment() {
       ); 
     });
   } 
+
   // add employee
   function addEmployee() {
     inquirer
@@ -205,3 +212,41 @@ function viewDepartment() {
       ); 
     }); 
   } 
+
+// update role
+function updateRole() {
+  // prompt for info about the item being put up for auction
+  inquirer
+    .prompt([
+      {
+        name: "roleTitle",
+        type: "input",
+        message: "What is the title of the role you would like to update?"
+      },
+      {
+        name: "roleSalary",
+        type: "input",
+        message: "What is the salary of the role you would like to update",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
+      }
+    ])
+    .then(function(answer) {
+      connection.query(
+        "UPDATE role SET ? WHERE ?",
+        {
+          title: answer.roleTitle,
+          salary: answer.roleSalary,
+        },
+        function(err) {
+          if (err) throw err;
+          console.log("You have successfully updated role.");
+          connection.end(); 
+        }
+      );
+    });
+}
