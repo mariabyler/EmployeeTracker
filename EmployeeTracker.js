@@ -33,8 +33,7 @@ function view() {
     .then(function(answer) {
       if (answer.viewOptions === "DEPARTMENT") {
         viewDepartment();
-      }
-      else if(answer.viewOptions === "ROLE") {
+      } else if(answer.viewOptions === "ROLE") {
         viewRole();
       } else if(answer.viewOptions === "EMPLOYEE") {
         viewEmployee();
@@ -88,6 +87,31 @@ function update() {
       }
     });
 }
+
+function viewEmployee() {
+  // query the database for all items being auctioned
+  connection.query("SELECT * FROM employee", function(err, results) {
+    if (err) throw err;
+    console.table(results); 
+  });
+}
+
+function viewRole() {
+  // query the database for all items being auctioned
+  connection.query("SELECT * FROM role", function(err, results) {
+    if (err) throw err;
+    console.table(results); 
+  });
+}
+
+function viewDepartment() {
+  // query the database for all items being auctioned
+  connection.query("SELECT * FROM department", function(err, results) {
+    if (err) throw err;
+    console.table(results); 
+  });
+}
+
 // add department
   function addDepartment() {
     inquirer
