@@ -3,21 +3,21 @@ CREATE DATABASE employees_db;
 USE employees_db; 
 
 CREATE TABLE department (
-  id int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  department_id int UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   department_name VARCHAR(100)UNIQUE  NOT NULL
 );
 
 CREATE TABLE role (
-  id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+  role_id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
   title VARCHAR(100) UNIQUE NOT NULL,
   salary DECIMAL UNSIGNED NOT NULL, 
   department_id INT UNSIGNED NOT NULL, 
-  INDEX dep_ind (department_id) 
-  -- CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+  INDEX dep_ind (department_id)
+  -- CONSTRAINT FK_departmentRole FOREIGN KEY (department_id) REFERENCES department(department_id)
 );
 
 CREATE TABLE employee (
-  id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+  employee_id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
   role_id INT UNSIGNED NOT NULL,
